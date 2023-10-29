@@ -8,7 +8,7 @@ function App() {
     return (
         <div>
             <h1>My first Dynamic React Application</h1>
-            <MovieList headingText='Movie List' secondaryText='Secondary text' />
+            <MovieList movies={movies} headingText='Movie List' />
         </div>
     );
 }
