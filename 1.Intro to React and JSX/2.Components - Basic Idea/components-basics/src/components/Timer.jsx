@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function Timer(props) {
-    const [time, setTime] = useState(0);
+    const [time, setTime] = useState(props.startTime);
 
     // Don't use setTimeout, useEffect is more appropriate!
     setTimeout(() => {

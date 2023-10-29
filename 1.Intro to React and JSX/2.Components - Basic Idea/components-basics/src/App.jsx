@@ -9,7 +9,7 @@ function App() {
         <div>
             <h1>My first Dynamic React Application</h1>
 
-            <Timer />
+            <Timer startTime={5}/>
 
             <MovieList movies={movies} headingText='Movie List' />
         </div>
