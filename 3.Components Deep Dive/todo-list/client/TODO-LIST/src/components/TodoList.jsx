@@ -1,6 +1,18 @@
-import TodoItem from "./TodoItem";
+import { useEffect, useState } from 'react';
+import TodoItem from './TodoItem';
 
 export default function TodoList() {
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3030/jsonstore/todos')
+            .then((response) => response.json())
+            .then((data) => {
+                setTodos(Object.values(data))
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
     return (
         <section className='todo-list-container'>
             <h1>Todo List</h1>
@@ -27,7 +39,13 @@ export default function TodoList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {/*  */}
+                        {todos.map(todo => (
+                            <TodoItem 
+                                key={todo._id}
+                                text={todo.text}
+                                isCompleted={todo.isCompleted}
+                            />
+                        ))}
                     </tbody>
                 </table>
             </div>
