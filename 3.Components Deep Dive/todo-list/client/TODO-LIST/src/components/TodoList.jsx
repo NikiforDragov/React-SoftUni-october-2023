@@ -1,3 +1,5 @@
+import TodoItem from "./TodoItem";
+
 export default function TodoList() {
     return (
         <section className='todo-list-container'>
@@ -25,15 +27,7 @@ export default function TodoList() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className='todo is-completed'>
-                            <td>Give dog a bath</td>
-                            <td>Complete</td>
-                            <td className='todo-action'>
-                                <button className='btn todo-btn'>
-                                    Change status
-                                </button>
-                            </td>
-                        </tr>
+                        {/*  */}
                     </tbody>
                 </table>
             </div>
