@@ -8,10 +8,20 @@ export default function TodoList() {
         fetch('http://localhost:3030/jsonstore/todos')
             .then((response) => response.json())
             .then((data) => {
-                setTodos(Object.values(data))
+                setTodos(Object.values(data));
             })
             .catch((err) => console.log(err));
     }, []);
+
+    const changeStatusHandler = (todoId) => {
+        setTodos((state) =>
+            state.map((todo) =>
+                todo._id === todoId
+                    ? { ...todo, isCompleted: !todo.isCompleted }
+                    : todo
+            )
+        );
+    };
 
     return (
         <section className='todo-list-container'>
@@ -39,11 +49,13 @@ export default function TodoList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {todos.map(todo => (
-                            <TodoItem 
+                        {todos.map((todo) => (
+                            <TodoItem
                                 key={todo._id}
+                                _id={todo._id}
                                 text={todo.text}
                                 isCompleted={todo.isCompleted}
+                                changeStatusHandler={changeStatusHandler}
                             />
                         ))}
                     </tbody>

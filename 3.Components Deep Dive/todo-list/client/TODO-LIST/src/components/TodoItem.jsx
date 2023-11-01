@@ -1,7 +1,13 @@
 export default function TodoItem({
+    _id,
     text, 
-    isCompleted
+    isCompleted,
+    changeStatusHandler
 }) {
+    const onChangeStatusClick = () => {
+        changeStatusHandler(_id)
+    }
+
     return (
         <tr className={`todo${isCompleted ? ' is-completed' : ''}`}>
             <td>{text}</td>
