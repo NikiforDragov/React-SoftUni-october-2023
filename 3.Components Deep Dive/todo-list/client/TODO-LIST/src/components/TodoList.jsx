@@ -3,12 +3,14 @@ import TodoItem from './TodoItem';
 
 export default function TodoList() {
     const [todos, setTodos] = useState([]);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch('http://localhost:3030/jsonstore/todos')
             .then((response) => response.json())
             .then((data) => {
                 setTodos(Object.values(data));
+                setLoading(false);
             })
             .catch((err) => console.log(err));
     }, []);
@@ -32,13 +34,15 @@ export default function TodoList() {
             </div>
 
             <div className='table-wrapper'>
-                {/* <div className='loading-container'>
-                            <div className='loading-spinner'>
-                                <span className='loading-spinner-text'>
-                                    Loading
-                                </span>
-                            </div>
-                        </div> */}
+                {isLoading ? (
+                    <div className='loading-container'>
+                        <div className='loading-spinner'>
+                            <span className='loading-spinner-text'>
+                                Loading
+                            </span>
+                        </div>
+                    </div>
+                ) : null}
 
                 <table className='table'>
                     <thead>
