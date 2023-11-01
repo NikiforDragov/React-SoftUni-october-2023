@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
+import Spinner from './Spinner';
 
 export default function TodoList() {
     const [todos, setTodos] = useState([]);
@@ -34,15 +35,7 @@ export default function TodoList() {
             </div>
 
             <div className='table-wrapper'>
-                {isLoading ? (
-                    <div className='loading-container'>
-                        <div className='loading-spinner'>
-                            <span className='loading-spinner-text'>
-                                Loading
-                            </span>
-                        </div>
-                    </div>
-                ) : null}
+                {isLoading ? <Spinner /> : null}
 
                 <table className='table'>
                     <thead>
