@@ -6,8 +6,7 @@ const UserListTable = () => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        userService.getAll()
-        .then(result => setUsers(result));
+        userService.getAll().then((result) => setUsers(result));
     }, []);
 
     return (
@@ -178,8 +177,16 @@ const UserListTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => (
-                        <UserListItem {...user} />
+                    {users.map((user) => (
+                        <UserListItem
+                            key={user._id}
+                            createdAt={user.createdAt}
+                            email={user.email}
+                            firstName={user.firstName}
+                            imageUrl={user.imageUrl}
+                            lastName={user.lastName}
+                            phoneNumber={user.phoneNumber}
+                        />
                     ))}
                 </tbody>
             </table>
