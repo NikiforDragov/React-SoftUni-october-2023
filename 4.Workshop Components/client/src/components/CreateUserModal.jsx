@@ -1,6 +1,6 @@
 const CreateUserModal = ({
     hideModal,
-    onUserCreate,
+    onCreate,
 }) => {
     return (
         <div className='overlay'>
@@ -27,7 +27,7 @@ const CreateUserModal = ({
                             </svg>
                         </button>
                     </header>
-                    <form onSubmit={onUserCreate}>
+                    <form onSubmit={onCreate}>
                         <div className='form-row'>
                             <div className='form-group'>
                                 <label htmlFor='firstName'>First name</label>

@@ -9,6 +9,13 @@ export const getAll = async () => {
         return data;
 }
 
+export const getOne = async (userId) => {
+    const response = await fetch(`${baseUrl}/${userId}`);
+    const result = await response.json();
+
+    return result;
+}
+
 export const create = async (data) => {
     const body = {
         firstName: data.firstName,
@@ -16,8 +23,8 @@ export const create = async (data) => {
         email: data.email,
         imageUrl: data.imageUrl,
         phoneNumber: data.phoneNumber,
-        createdAt: new Date().toISOString,
-        updatedAt: new Date().toISOString,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
         adress: {
             country: data.country,
             city: data.city,

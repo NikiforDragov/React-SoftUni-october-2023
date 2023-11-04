@@ -1,17 +1,26 @@
-import {formatDate} from '../utils/dateUtils';
+import { formatDate } from '../utils/dateUtils';
 
 const UserListItem = ({
+    userId,
     firstName,
     lastName,
     email,
     phoneNumber,
     createdAt,
     imageUrl,
+    onInfoClick,
 }) => {
+    const infoClickHandler = () => {
+        onInfoClick(userId);
+    };
     return (
         <tr>
             <td>
-                <img src={imageUrl} alt={`${firstName}'s profile`} className='image' />
+                <img
+                    src={imageUrl}
+                    alt={`${firstName}'s profile`}
+                    className='image'
+                />
             </td>
             <td>{firstName}</td>
             <td>{lastName}</td>
@@ -54,7 +63,11 @@ const UserListItem = ({
                         ></path>
                     </svg>
                 </button>
-                <button className='btn info-btn' title='Info'>
+                <button
+                    className='btn info-btn'
+                    title='Info'
+                    onClick={infoClickHandler}
+                >
                     <svg
                         aria-hidden='true'
                         focusable='false'
