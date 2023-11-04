@@ -1,6 +1,15 @@
-import UserListItem from "./UserListItem";
+import UserListItem from './UserListItem';
+import { useEffect, useState } from 'react';
+import * as userService from '../services/userService';
 
 const UserListTable = () => {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        userService.getAll()
+        .then(result => setUsers(result));
+    }, []);
+
     return (
         <div className='table-wrapper'>
             {/* <!-- <div className="loading-shade"> -->
@@ -169,7 +178,9 @@ const UserListTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <UserListItem />
+                    {users.map(user => (
+                        <UserListItem {...user} />
+                    ))}
                 </tbody>
             </table>
         </div>
