@@ -1,10 +1,26 @@
 import { useState } from 'react';
 
 export default function ControlledForm() {
-    const [usernameValue, setUsernameValue] = useState('Ivo');
+    const [usernameValue, setUsernameValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState('');
+    const [ageValue, setAgeValue] = useState(0);
 
     const usernameChangeHandler = (e) => {
         setUsernameValue(e.target.value);
+    };
+
+    const passwordChangeHandler = (e) => {
+        setPasswordValue(e.target.value);
+    };
+
+    const ageChangeHandler = (e) => {
+        setAgeValue(Number(e.target.value));
+    };
+
+    const resetFormHandler = () => {
+        setUsernameValue('');
+        setPasswordValue('');
+        setAgeValue(0);
     };
 
     return (
@@ -24,14 +40,29 @@ export default function ControlledForm() {
                 </div>
                 <div>
                     <label htmlFor='password'>Password:</label>
-                    <input type='password' name='password' id='password' />
+                    <input
+                        type='password'
+                        name='password'
+                        id='password'
+                        value={passwordValue}
+                        onChange={passwordChangeHandler}
+                    />
                 </div>
                 <div>
                     <label htmlFor='age'>Age:</label>
-                    <input type='number' name='age' id='age' />
+                    <input
+                        type='number'
+                        name='age'
+                        id='age'
+                        value={ageValue}
+                        onChange={ageChangeHandler}
+                    />
                 </div>
                 <div>
-                    <input type='submit' value='Register' />
+                    <button>Register</button>
+                    <button type='button' onClick={resetFormHandler}>
+                        Reset
+                    </button>
                 </div>
             </form>
         </>
