@@ -5,6 +5,9 @@ const formInitialState = {
     password: '',
     age: '',
     gender: 'Male',
+    swimming: false,
+    football: false,
+    kickboxing: false,
 };
 
 export default function ControlledForm() {
@@ -14,6 +17,13 @@ export default function ControlledForm() {
         setFormValues((state) => ({
             ...state,
             [e.target.name]: e.target.value,
+        }));
+    };
+
+    const onCheckboxChange = (e) => {
+        setFormValues((state) => ({
+            ...state,
+            [e.target.name]: e.target.checked,
         }));
     };
 
@@ -64,10 +74,49 @@ export default function ControlledForm() {
 
                 <div>
                     <label htmlFor='gender'>Gender:</label>
-                    <select name='gender' id='gender' onChange={changeHandler}>
-                        <option value='Male' selected={formValues.gender === 'Male'}>Male</option>
-                        <option value='Female' selected={formValues.gender === 'Female'}>Female</option>
+                    <select name='gender' id='gender' onChange={changeHandler} value={formValues.gender}>
+                        <option
+                            value='Male'
+                        >
+                            Male
+                        </option>
+                        <option
+                            value='Female'
+                        >
+                            Female
+                        </option>
                     </select>
+                </div>
+
+                <div>
+                    <h3>Hobbies</h3>
+
+                    <label htmlFor='swimming'>Swimming</label>
+                    <input
+                        type='checkbox'
+                        name='swimming'
+                        id='swimming'
+                        checked={formValues.swimming}
+                        onChange={onCheckboxChange}
+                    />
+
+                    <label htmlFor='football'>Football</label>
+                    <input
+                        type='checkbox'
+                        name='football'
+                        id='football'
+                        checked={formValues.football}
+                        onChange={onCheckboxChange}
+                    />
+
+                    <label htmlFor='kickboxing'>Kickboxing</label>
+                    <input
+                        type='checkbox'
+                        name='kickboxing'
+                        id='kickboxing'
+                        checked={formValues.kickboxing}
+                        onChange={onCheckboxChange}
+                    />
                 </div>
 
                 <div>
