@@ -1,33 +1,27 @@
 import { useState } from 'react';
 
+const formInitialState = {
+    username: '',
+    password: '',
+    age: '',
+};
+
 export default function ControlledForm() {
-    const [usernameValue, setUsernameValue] = useState('');
-    const [passwordValue, setPasswordValue] = useState('');
-    const [ageValue, setAgeValue] = useState('');
+    const [formValues, setFormValues] = useState(formInitialState);
 
-    const usernameChangeHandler = (e) => {
-        setUsernameValue(e.target.value);
-    };
-
-    const passwordChangeHandler = (e) => {
-        setPasswordValue(e.target.value);
-    };
-
-    const ageChangeHandler = (e) => {
-        setAgeValue(Number(e.target.value));
+    const changeHandler = (e) => {
+        setFormValues((state) => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
     };
 
     const resetFormHandler = () => {
-        setUsernameValue('');
-        setPasswordValue('');
-        setAgeValue('');
+        setFormValues(formInitialState)
     };
 
     const submitHandler = () => {
-        console.log(usernameValue);
-        console.log(passwordValue);
-        console.log(ageValue);
-
+        console.log(formValues);
         resetFormHandler();
     };
 
@@ -42,8 +36,8 @@ export default function ControlledForm() {
                         type='text'
                         name='username'
                         id='username'
-                        value={usernameValue}
-                        onChange={usernameChangeHandler}
+                        value={formValues.username}
+                        onChange={changeHandler}
                     />
                 </div>
                 <div>
@@ -52,8 +46,8 @@ export default function ControlledForm() {
                         type='password'
                         name='password'
                         id='password'
-                        value={passwordValue}
-                        onChange={passwordChangeHandler}
+                        value={formValues.password}
+                        onChange={changeHandler}
                     />
                 </div>
                 <div>
@@ -62,8 +56,8 @@ export default function ControlledForm() {
                         type='number'
                         name='age'
                         id='age'
-                        value={ageValue}
-                        onChange={ageChangeHandler}
+                        value={formValues.age}
+                        onChange={changeHandler}
                     />
                 </div>
                 <div>
