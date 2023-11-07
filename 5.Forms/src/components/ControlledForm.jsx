@@ -4,6 +4,7 @@ const formInitialState = {
     username: '',
     password: '',
     age: '',
+    gender: 'Male',
 };
 
 export default function ControlledForm() {
@@ -17,7 +18,7 @@ export default function ControlledForm() {
     };
 
     const resetFormHandler = () => {
-        setFormValues(formInitialState)
+        setFormValues(formInitialState);
     };
 
     const submitHandler = () => {
@@ -60,6 +61,15 @@ export default function ControlledForm() {
                         onChange={changeHandler}
                     />
                 </div>
+
+                <div>
+                    <label htmlFor='gender'>Gender:</label>
+                    <select name='gender' id='gender' onChange={changeHandler}>
+                        <option value='Male' selected={formValues.gender === 'Male'}>Male</option>
+                        <option value='Female' selected={formValues.gender === 'Female'}>Female</option>
+                    </select>
+                </div>
+
                 <div>
                     <button type='button' onClick={submitHandler}>
                         Register
