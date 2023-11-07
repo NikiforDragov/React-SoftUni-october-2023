@@ -3,7 +3,7 @@ import { useState } from 'react';
 export default function ControlledForm() {
     const [usernameValue, setUsernameValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
-    const [ageValue, setAgeValue] = useState(0);
+    const [ageValue, setAgeValue] = useState('');
 
     const usernameChangeHandler = (e) => {
         setUsernameValue(e.target.value);
@@ -20,7 +20,15 @@ export default function ControlledForm() {
     const resetFormHandler = () => {
         setUsernameValue('');
         setPasswordValue('');
-        setAgeValue(0);
+        setAgeValue('');
+    };
+
+    const submitHandler = () => {
+        console.log(usernameValue);
+        console.log(passwordValue);
+        console.log(ageValue);
+
+        resetFormHandler();
     };
 
     return (
@@ -59,7 +67,9 @@ export default function ControlledForm() {
                     />
                 </div>
                 <div>
-                    <button>Register</button>
+                    <button type='button' onClick={submitHandler}>
+                        Register
+                    </button>
                     <button type='button' onClick={resetFormHandler}>
                         Reset
                     </button>
