@@ -14,7 +14,7 @@ const formInitialState = {
 
 export default function ControlledForm({ buttonRef }) {
     const [formValues, setFormValues] = useState(formInitialState);
-    const [ageError, setAgeError] = useState('');
+    const [errors, setErrors] = useState({});
 
     const changeHandler = (e) => {
         setFormValues((state) => ({
@@ -41,9 +41,17 @@ export default function ControlledForm({ buttonRef }) {
 
     const ageValidator = () => {
         if (formValues.age < 0 || formValues.age > 120) {
-            setAgeError('Age should be between 0 and 120!');
+            setErrors((state) => ({
+                ...state,
+                age: 'Age should be between 0 and 120!',
+            }));
         } else {
-            setAgeError('');
+            if (errors.age) {
+                setErrors((state) => ({
+                    ...state,
+                    age: '',
+                }));
+            }
         }
     };
 
@@ -81,10 +89,10 @@ export default function ControlledForm({ buttonRef }) {
                         value={formValues.age}
                         onChange={changeHandler}
                         onBlur={ageValidator}
-                        className={ageError && styles.inputError}
+                        className={errors.age && styles.inputError}
                     />
-                    {ageError && (
-                        <p className={styles.errorMessage}>{ageError}</p>
+                    {errors.age && (
+                        <p className={styles.errorMessage}>{errors.age}</p>
                     )}
                 </div>
 
