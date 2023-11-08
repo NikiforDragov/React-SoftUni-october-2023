@@ -10,7 +10,7 @@ const formInitialState = {
     kickboxing: false,
 };
 
-export default function ControlledForm() {
+export default function ControlledForm({ buttonRef,}) {
     const [formValues, setFormValues] = useState(formInitialState);
 
     const changeHandler = (e) => {
@@ -74,17 +74,14 @@ export default function ControlledForm() {
 
                 <div>
                     <label htmlFor='gender'>Gender:</label>
-                    <select name='gender' id='gender' onChange={changeHandler} value={formValues.gender}>
-                        <option
-                            value='Male'
-                        >
-                            Male
-                        </option>
-                        <option
-                            value='Female'
-                        >
-                            Female
-                        </option>
+                    <select
+                        name='gender'
+                        id='gender'
+                        onChange={changeHandler}
+                        value={formValues.gender}
+                    >
+                        <option value='Male'>Male</option>
+                        <option value='Female'>Female</option>
                     </select>
                 </div>
 
