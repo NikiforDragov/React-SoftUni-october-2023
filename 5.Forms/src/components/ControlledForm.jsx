@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import styles from '../components/ControlledForm.module.css';
+
 const formInitialState = {
     username: '',
     password: '',
@@ -10,8 +12,9 @@ const formInitialState = {
     kickboxing: false,
 };
 
-export default function ControlledForm({ buttonRef,}) {
+export default function ControlledForm({ buttonRef }) {
     const [formValues, setFormValues] = useState(formInitialState);
+    const [ageError, setAgeError] = useState('');
 
     const changeHandler = (e) => {
         setFormValues((state) => ({
@@ -34,6 +37,12 @@ export default function ControlledForm({ buttonRef,}) {
     const submitHandler = () => {
         console.log(formValues);
         resetFormHandler();
+    };
+
+    const ageValidator = () => {
+        if (formValues.age < 0 || formValues.age > 120) {
+            setAgeError('Age should be between 0 and 120!');
+        }
     };
 
     return (
@@ -69,7 +78,11 @@ export default function ControlledForm({ buttonRef,}) {
                         id='age'
                         value={formValues.age}
                         onChange={changeHandler}
+                        onBlur={ageValidator}
                     />
+                    {ageError && (
+                        <p className={styles.errorMessage}>{ageError}</p>
+                    )}
                 </div>
 
                 <div>
