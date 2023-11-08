@@ -42,6 +42,8 @@ export default function ControlledForm({ buttonRef }) {
     const ageValidator = () => {
         if (formValues.age < 0 || formValues.age > 120) {
             setAgeError('Age should be between 0 and 120!');
+        } else {
+            setAgeError('');
         }
     };
 
@@ -79,6 +81,7 @@ export default function ControlledForm({ buttonRef }) {
                         value={formValues.age}
                         onChange={changeHandler}
                         onBlur={ageValidator}
+                        className={ageError && styles.inputError}
                     />
                     {ageError && (
                         <p className={styles.errorMessage}>{ageError}</p>
