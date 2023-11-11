@@ -2,9 +2,12 @@ const Contacts = () => {
     return (
         <>
             <h2>Contacts Page</h2>
-            
-            <input type='text' />
-            <textarea name='' id='' cols='30' rows='10'></textarea>
+            <label htmlFor=''>Title</label>
+            <br />
+            <input type='text' /> <br />
+            <label htmlFor=''>Description</label>
+            <br />
+            <textarea name='' id='' cols='30' rows='10'></textarea> <br />
             <input type='submit' />
         </>
     );

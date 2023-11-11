@@ -5,13 +5,12 @@ import Home from './components/Home';
 import About from './components/About';
 import Contacts from './components/Contacts';
 
-import './App.css';
-
 function App() {
     return (
         <>
-            <h1>React Router</h1>
             <Navigation />
+            
+            <h1>React Router</h1>
 
             <Routes>
                 <Route path='/' element={<Home />}></Route>
