@@ -15,6 +15,7 @@ const Navigation = () => {
                         <Nav.Link as={Link} to='/'>Home</Nav.Link>
                         <Nav.Link as={Link} to='/about'>About</Nav.Link> 
                         <Nav.Link as={Link} to='/contacts'>Contacts</Nav.Link> 
+                        <Nav.Link as={Link} to='/characters'>Characters</Nav.Link> 
                     </Nav>
                 </Navbar.Collapse>
             </Container>
