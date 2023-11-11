@@ -1,7 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
+import { normalizeName } from '../utils/characterUtils';
 
 const CharacterListItem = ({
+    id,
     name,
     hair_color,
     eye_color,
@@ -21,7 +24,13 @@ const CharacterListItem = ({
                         <li>gender: {gender}</li>
                     </ul>
                 </Card.Text>
-                <Button variant='primary'>Go somewhere</Button>
+                <Button
+                    as={Link}
+                    to={`/characters/${id}`}
+                    variant='primary'
+                >
+                    Details
+                </Button>
             </Card.Body>
         </Card>
     );
