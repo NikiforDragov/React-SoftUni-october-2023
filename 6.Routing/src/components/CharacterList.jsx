@@ -13,7 +13,7 @@ const CharacterList = () => {
     });
 
     return (
-        <div className='characterList'>
+        <div className={styles.characterList}>
             {characters.map((character, index) => (
                 <CharacterListItem
                     key={character.name}
