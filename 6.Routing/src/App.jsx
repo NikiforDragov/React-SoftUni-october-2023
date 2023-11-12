@@ -6,6 +6,7 @@ import About from './components/About';
 import Contacts from './components/Contacts';
 import CharacterList from './components/CharacterList';
 import CharacterDetails from './components/CharacterDetails';
+import NotFound from './components/NotFound';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path='/contacts' element={<Contacts />}></Route>
                 <Route path='/characters' element={<CharacterList />}></Route>
                 <Route path='/characters/:id' element={<CharacterDetails />}></Route>
+                <Route path='*' element={<NotFound />}></Route>
             </Routes>
 
             <footer>All rights reserved</footer>
