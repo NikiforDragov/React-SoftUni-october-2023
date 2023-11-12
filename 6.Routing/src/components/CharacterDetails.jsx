@@ -21,7 +21,7 @@ const CharacterDetails = () => {
             })
             .then(setCharacter)
             .catch((err) => {
-                navigate('/404')
+                navigate('/characters')
             })
     }, [id]);
 
