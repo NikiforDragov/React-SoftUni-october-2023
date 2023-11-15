@@ -1,21 +1,33 @@
-export default function GameDetails() {
-    return(
-        <section id="game-details">
-            <h1>Game Details</h1>
-            <div className="info-section">
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-                <div className="game-header">
-                    <img className="game-img" src="images/MineCraft.png" />
+import * as gameService from '../../services/gameService';
+
+export default function GameDetails() {
+    const {} = useParams();
+
+    useEffect(() => {
+        gameService.getOne()
+    });
+
+    return (
+        <section id='game-details'>
+            <h1>Game Details</h1>
+            <div className='info-section'>
+                <div className='game-header'>
+                    <img className='game-img' src='images/MineCraft.png' />
                     <h1>Bright</h1>
-                    <span className="levels">MaxLevel: 4</span>
-                    <p className="type">Action, Crime, Fantasy</p>
+                    <span className='levels'>MaxLevel: 4</span>
+                    <p className='type'>Action, Crime, Fantasy</p>
                 </div>
 
-                <p className="text">
-                    Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work
-                    with an Orc to find a weapon everyone is prepared to kill for. Set in a world where fantasy
-                    creatures live side by side with humans. A human cop is forced
-                    to work with an Orc to find a weapon everyone is prepared to kill for.
+                <p className='text'>
+                    Set in a world where fantasy creatures live side by side
+                    with humans. A human cop is forced to work with an Orc to
+                    find a weapon everyone is prepared to kill for. Set in a
+                    world where fantasy creatures live side by side with humans.
+                    A human cop is forced to work with an Orc to find a weapon
+                    everyone is prepared to kill for.
                 </p>
 
                 {/* <!-- Bonus ( for Guests and Users ) -->
@@ -35,10 +47,10 @@ export default function GameDetails() {
                 </div> */}
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
-                <div className="buttons">
+                {/* <div className="buttons">
                     <a href="#" className="button">Edit</a>
                     <a href="#" className="button">Delete</a>
-                </div>
+                </div> */}
             </div>
 
             {/* <!-- Bonus -->
@@ -50,7 +62,6 @@ export default function GameDetails() {
                     <input className="btn submit" type="submit" value="Add Comment"/>
                 </form>
             </article> */}
-
         </section>
-    )
+    );
 }
