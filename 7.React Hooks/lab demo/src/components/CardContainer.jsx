@@ -6,13 +6,19 @@ export default function CardContainer({ todos, onSubmitHandler }) {
         <div
             style={{ margin: '20px', display: 'flex', flexDirection: 'column' }}
         >
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                }}
+            >
                 {todos.map((item) => (
                     <ToDoCard key={item._id} {...item} />
                 ))}
             </div>
             <div>
-                <AddTodo style={{ display: 'block' }}/>
+                <AddTodo style={{ display: 'block' }} />
             </div>
         </div>
     );
