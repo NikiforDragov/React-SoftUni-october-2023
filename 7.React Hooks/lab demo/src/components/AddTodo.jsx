@@ -1,20 +1,11 @@
-import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import useForm from '../hooks/useForm';
 
-export default function AddTodo() {
-    const [formValue, setFormValue] = useState([]);
-
-    const onChangeHandler = (e) => {
-        setFormValue((state) => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log('submit');
-    };
+export default function AddTodo(props) {
+    const { formValue, changeHandler, onSubmit } = useForm(
+        { title: '' },
+        props.onSubmitHandler
+    );
 
     return (
         <Form onSubmit={onSubmit}>
@@ -24,10 +15,12 @@ export default function AddTodo() {
                     type='text'
                     name='title'
                     value={formValue.name}
-                    onChange={onChangeHandler}
+                    onChange={changeHandler}
                 />
             </Form.Group>
-            <Button variant='primary' type='submit'>Submit</Button>
+            <Button variant='primary' type='submit'>
+                Submit
+            </Button>
         </Form>
     );
 }

@@ -1,7 +1,7 @@
 import AddTodo from './AddTodo';
 import ToDoCard from './ToDoCard';
 
-export default function CardContainer({ todos }) {
+export default function CardContainer({ todos, onSubmitHandler }) {
     return (
         <div
             style={{ margin: '20px', display: 'flex', flexDirection: 'column' }}
@@ -11,8 +11,8 @@ export default function CardContainer({ todos }) {
                     <ToDoCard key={item._id} {...item} />
                 ))}
             </div>
-            <div style={{ display: 'block' }}>
-                <AddTodo />
+            <div>
+                <AddTodo style={{ display: 'block' }} onSubmitHandler={onSubmitHandler} />
             </div>
         </div>
     );
