@@ -1,9 +1,13 @@
+import Navigation from "./components/Navigation";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
-  return (
-    <>
-    <h1>Work!</h1>
-    </>
-  )
+    return (
+        <>
+            <Navigation />
+        </>
+    );
 }
 
-export default App
+export default App;
