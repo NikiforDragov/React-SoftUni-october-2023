@@ -1,10 +1,13 @@
 import { Form, Button } from 'react-bootstrap';
 import useForm from '../hooks/useForm';
+import { useContext } from 'react';
+import { TodoContext } from '../context/TodoContext';
 
-export default function AddTodo(props) {
+export default function AddTodo() {
+    const { onSubmitHandler } = useContext(TodoContext);
     const { formValue, changeHandler, onSubmit } = useForm(
         { title: '' },
-        props.onSubmitHandler
+        onSubmitHandler
     );
 
     return (

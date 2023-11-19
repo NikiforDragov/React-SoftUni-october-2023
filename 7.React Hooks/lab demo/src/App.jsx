@@ -3,6 +3,7 @@ import CardContainer from './components/CardContainer';
 import Header from './components/Header';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { TodoContext } from './context/TodoContext';
 
 const baseUrl = 'http://localhost:3030/jsonstore/todos';
 
@@ -32,10 +33,16 @@ function App() {
         setTodos((state) => [...state, data]);
     };
 
+    const context = {
+      onSubmitHandler
+    }
+
     return (
         <>
+        <TodoContext.Provider value={context}>
             <Header />
-            <CardContainer todos={todos} onSubmitHandler={onSubmitHandler} />
+            <CardContainer todos={todos}/>
+        </TodoContext.Provider>
         </>
     );
 }

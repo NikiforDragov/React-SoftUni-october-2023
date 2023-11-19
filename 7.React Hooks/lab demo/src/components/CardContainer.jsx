@@ -12,7 +12,7 @@ export default function CardContainer({ todos, onSubmitHandler }) {
                 ))}
             </div>
             <div>
-                <AddTodo style={{ display: 'block' }} onSubmitHandler={onSubmitHandler} />
+                <AddTodo style={{ display: 'block' }}/>
             </div>
         </div>
     );
