@@ -14,7 +14,7 @@ export default function AddTodo(props) {
                 <Form.Control
                     type='text'
                     name='title'
-                    value={formValue.name}
+                    value={formValue.title}
                     onChange={changeHandler}
                 />
             </Form.Group>
