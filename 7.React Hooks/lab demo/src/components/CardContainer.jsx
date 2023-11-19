@@ -1,9 +1,11 @@
-import CardExample from './CardExample';
+import ToDoCard from './ToDoCard';
 
-export default function CardContainer(todos) {
+export default function CardContainer({ todos }) {
     return (
         <div style={{ margin: '20px' }}>
-            <CardExample />
+            {todos.map((item) => (
+                <ToDoCard key={item._id} {...item} />
+            ))}
         </div>
     );
 }

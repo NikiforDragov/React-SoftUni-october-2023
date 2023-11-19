@@ -12,12 +12,12 @@ function App() {
     useEffect(() => {
         fetch(`${baseUrl}todos`)
             .then((response) => {
-                response.json();
+              return  response.json();
             })
             .then((result) => {
                 setTodos(Object.values(result));
             });
-    });
+    }, []);
 
     return (
         <>
