@@ -14,7 +14,7 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 
 function App() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [auth, setAuth] = useState({});
 
     const loginSubmitHandler = async ({ email, password }) => {
@@ -22,16 +22,23 @@ function App() {
 
         setAuth(result);
 
-        navigate(Path.Home)
+        navigate(Path.Home);
+    };
+
+    const values = {
+        loginSubmitHandler,
+        username: auth.username,
+        email: auth.email,
+        isAuthenticated: !!auth.username,
     };
 
     return (
-        <AuthContext.Provider value={{ loginSubmitHandler }}>
+        <AuthContext.Provider value={values}>
             <div id='box'>
                 <Header />
 
                 <Routes>
-                    <Route path='/' element={<Home />}></Route>
+                    <Route path={Path.Home} element={<Home />}></Route>
                     <Route path='/games' element={<GameList />}></Route>
                     <Route
                         path='/games/create'
