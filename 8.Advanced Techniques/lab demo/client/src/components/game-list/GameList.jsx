@@ -7,14 +7,19 @@ export default function GameList() {
     const [games, setGames] = useState([]);
 
     useEffect(() => {
-        gameService.getAll().then((result) => setGames(result));
+        gameService
+            .getAll()
+            .then((result) => setGames(result))
+            .catch((err) => {
+                console.log(err);
+            });
     }, []);
 
     return (
         <section id='catalog-page'>
             <h1>All Games</h1>
 
-            {games.map(game => (
+            {games.map((game) => (
                 <GameListItem key={game._id} {...game} />
             ))}
 
