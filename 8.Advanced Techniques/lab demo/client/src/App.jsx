@@ -1,49 +1,86 @@
-import { useEffect, useState } from 'react';
-import CardContainer from './components/CardContainer';
-import Header from './components/Header';
+import { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { TodoContext } from './context/TodoContext';
+import * as authService from './services/authService';
+import AuthContext from './contexts/authContext';
+import Path from './paths';
 
-const baseUrl = 'http://localhost:3030/jsonstore/todos';
+import Header from './components/header/Header';
+import Home from './components/home/Home';
+import GameList from './components/game-list/GameList';
+import GameCreate from './components/game-create/GameCreate';
+import GameDetails from './components/game-details/GameDetails';
+import Login from './components/login/Login';
+import Register from './components/register/Register';
+import Logout from './components/logout/Logout';
 
 function App() {
-    const [todos, setTodos] = useState([]);
+    const navigate = useNavigate();
+    const [auth, setAuth] = useState(() => {
+        localStorage.removeItem('accessToken');
 
-    useEffect(() => {
-        fetch(`${baseUrl}`)
-            .then((response) => {
-                return response.json();
-            })
-            .then((result) => {
-                setTodos(Object.values(result));
-            });
-    }, []);
+        return {};
+    });
 
-    const onSubmitHandler = async (value) => {
-        const response = await fetch(baseUrl, {
-            method: 'POST',
-            header: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({ ...value, isFinish: 'false' }),
-        });
+    const loginSubmitHandler = async ({ email, password }) => {
+        const result = await authService.login(email, password);
 
-        const data = await response.json();
-        setTodos((state) => [...state, data]);
+        setAuth(result);
+
+        localStorage.setItem('accessToken', result.accessToken);
+
+        navigate(Path.Home);
     };
 
-    const context = {
-      onSubmitHandler
-    }
+    const registerSubmitHandler = async (values) => {
+        const result = await authService.register(
+            values.email,
+            values.password
+        );
+
+        setAuth(result);
+
+        localStorage.setItem('accessToken', result.accessToken);
+
+        navigate(Path.Home);
+    };
+
+    const logoutHandler = () => {
+        setAuth({});
+        localStorage.removeItem('accessToken');
+    };
+
+    const values = {
+        loginSubmitHandler,
+        registerSubmitHandler,
+        logoutHandler,
+        username: auth.username || auth.email,
+        email: auth.email,
+        isAuthenticated: !!auth.accessToken,
+    };
 
     return (
-        <>
-        <TodoContext.Provider value={context}>
-            <Header />
-            <CardContainer todos={todos}/>
-        </TodoContext.Provider>
-        </>
+        <AuthContext.Provider value={values}>
+            <div id='box'>
+                <Header />
+
+                <Routes>
+                    <Route path={Path.Home} element={<Home />}></Route>
+                    <Route path='/games' element={<GameList />}></Route>
+                    <Route
+                        path='/games/create'
+                        element={<GameCreate />}
+                    ></Route>
+                    <Route
+                        path='/games/:gameId/details'
+                        element={<GameDetails />}
+                    ></Route>
+                    <Route path='/login' element={<Login />}></Route>
+                    <Route path='/register' element={<Register />}></Route>
+                    <Route path={Path.Logout} element={<Logout />}></Route>
+                </Routes>
+            </div>
+        </AuthContext.Provider>
     );
 }
 
