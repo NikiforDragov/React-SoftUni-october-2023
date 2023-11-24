@@ -4,17 +4,8 @@ import { useParams } from 'react-router-dom';
 import * as gameService from '../../services/gameService';
 import * as commentService from '../../services/commentService';
 import AuthContext from '../../contexts/authContext';
+import reducer from './commentReducer'
 
-const reducer = (state, action) => {
-    switch (action?.type) {
-        case 'GET_ALL_GAMES':
-            return [...action.payload];
-        case 'ADD_COMMENT':
-            return [...state, action.payload];
-        default:
-            return state;
-    }
-};
 
 export default function GameDetails() {
     const { email } = useContext(AuthContext);
@@ -27,7 +18,7 @@ export default function GameDetails() {
 
         commentService.getAll(gameId).then((result) => {
             dispatch({
-                type: 'GET_ALL_GAMES',
+                type: 'GET_ALL_COMMENTS',
                 payload: result,
             });
         });
@@ -43,7 +34,7 @@ export default function GameDetails() {
             formData.get('comment')
         );
 
-        createdComment.owner = {email};
+        createdComment.owner = { email };
 
         dispatch({
             type: 'ADD_COMMENT',
