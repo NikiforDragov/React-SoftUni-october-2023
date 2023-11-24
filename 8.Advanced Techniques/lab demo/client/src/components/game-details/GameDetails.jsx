@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import * as gameService from '../../services/gameService';
 import * as commentService from '../../services/commentService';
 import AuthContext from '../../contexts/authContext';
-import reducer from './commentReducer'
-
+import reducer from './commentReducer';
+import useForm from '../../hooks/useForm';
 
 export default function GameDetails() {
     const { email } = useContext(AuthContext);
@@ -24,14 +24,10 @@ export default function GameDetails() {
         });
     }, [gameId]);
 
-    const addCommentHandler = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget);
-
+    const addCommentHandler = async (values) => {
         const createdComment = await commentService.create(
             gameId,
-            formData.get('comment')
+            values.comment
         );
 
         createdComment.owner = { email };
@@ -41,6 +37,10 @@ export default function GameDetails() {
             payload: createdComment,
         });
     };
+
+    const { values, onChange, onSubmit } = useForm(addCommentHandler, {
+        comment: '',
+    });
 
     return (
         <section id='game-details'>
@@ -85,9 +85,11 @@ export default function GameDetails() {
             {/* Add Comment ( Only for logged-in users, which is not creators of the current game )  */}
             <article className='create-comment'>
                 <label>Add new comment:</label>
-                <form className='form' onSubmit={addCommentHandler}>
+                <form className='form' onSubmit={onSubmit}>
                     <textarea
                         name='comment'
+                        value={values.comment}
+                        onChange={onChange}
                         placeholder='Comment......'
                     ></textarea>
                     <input
