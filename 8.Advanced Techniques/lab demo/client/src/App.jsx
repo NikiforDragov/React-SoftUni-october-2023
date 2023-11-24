@@ -1,4 +1,4 @@
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/authContext';
 import Path from './paths';
@@ -11,9 +11,9 @@ import GameDetails from './components/game-details/GameDetails';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Logout from './components/logout/Logout';
+import GameEdit from './components/game-edit/GameEdit';
 
 function App() {
-    
     return (
         <AuthProvider>
             <div id='box'>
@@ -30,6 +30,7 @@ function App() {
                         path='/games/:gameId/details'
                         element={<GameDetails />}
                     ></Route>
+                    <Route path={Path.GameEdit} element={<GameEdit />}></Route>
                     <Route path='/login' element={<Login />}></Route>
                     <Route path='/register' element={<Register />}></Route>
                     <Route path={Path.Logout} element={<Logout />}></Route>
