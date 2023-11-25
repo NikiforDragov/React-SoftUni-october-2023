@@ -7,7 +7,13 @@ import { useEffect, useState } from 'react';
 export default function GameEdit() {
     const navigate = useNavigate();
     const { gameId } = useParams();
-    const [game, setGame] = useState({});
+    const [game, setGame] = useState({
+        title: '',
+        category: '',
+        maxLevel: '',
+        imageUrl: '',
+        summary: '',
+    });
 
     useEffect(() => {
         gameService.getOne(gameId).then((result) => {
@@ -15,9 +21,9 @@ export default function GameEdit() {
         });
     }, [gameId]);
 
-    const createGameSubmitHandler = async (values) => {
+    const editGameSubmitHandler = async (values) => {
         try {
-            await gameService.create(gameData);
+            await gameService.edit(gameId, values);
 
             navigate('/games');
         } catch (err) {
@@ -26,13 +32,7 @@ export default function GameEdit() {
         }
     };
 
-    const { values, onChange, onSubmit } = useForm(createGameSubmitHandler, {
-        title: '',
-        category: '',
-        maxLevel: '',
-        imageUrl: '',
-        summary: '',
-    });
+    const { values, onChange, onSubmit } = useForm(editGameSubmitHandler, game);
 
     return (
         <section id='create-page' className='auth'>
@@ -90,7 +90,7 @@ export default function GameEdit() {
                     <input
                         className='btn submit'
                         type='submit'
-                        value='Create Game'
+                        value='Edit Game'
                     />
                 </div>
             </form>
