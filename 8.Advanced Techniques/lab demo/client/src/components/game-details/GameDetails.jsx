@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useMemo, useReducer, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import * as gameService from '../../services/gameService';
@@ -40,9 +40,15 @@ export default function GameDetails() {
         });
     };
 
-    const { values, onChange, onSubmit } = useForm(addCommentHandler, {
-        comment: '',
-    });
+    // TODO: temp solution
+    const initialValues = useMemo(
+        () => ({
+            comment: '',
+        }),
+        []
+    );
+
+    const { values, onChange, onSubmit } = useForm(addCommentHandler, initialValues);
 
     const isOwner = userId === game._ownerId;
 
