@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
+
 import {
     AppstoreOutlined,
     MailOutlined,
@@ -68,11 +68,13 @@ const items = [
     },
 ];
 
-const App = () => {
-    return (
-        <>
-            <Menu mode='horizontal' items={items} />
-        </>
-    );
-};
+class App extends React.Component {
+    render() {
+        return (
+            <>
+                <Menu mode='horizontal' items={items} />
+            </>
+        );
+    }
+}
 export default App;
