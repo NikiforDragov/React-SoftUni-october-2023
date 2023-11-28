@@ -8,7 +8,12 @@ export default class TodoList extends Component {
             <>
                 <Space direction='vertical' size={16}>
                     {this.props.todos.map((todo) => (
-                        <TodoListItem key={todo.id} {...todo} toggleTodo={this.props.toggleTodo} />
+                        <TodoListItem
+                            key={todo.id}
+                            {...todo}
+                            toggleTodo={this.props.toggleTodo}
+                            deleteTodo={this.props.deleteTodo}
+                        />
                     ))}
                 </Space>
             </>

@@ -79,6 +79,7 @@ class App extends React.Component {
         };
 
         this.toggleTodo = this.toggleTodo.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this);
     }
 
     componentDidMount() {
@@ -102,6 +103,12 @@ class App extends React.Component {
         });
     }
 
+    deleteTodo(todoId) {
+        this.setState({
+            todos: this.state.todos.filter((todo) => todo.id !== todoId),
+        });
+    }
+
     render() {
         return (
             <>
@@ -112,6 +119,7 @@ class App extends React.Component {
                 <TodoList
                     todos={this.state.todos}
                     toggleTodo={this.toggleTodo}
+                    deleteTodo={this.deleteTodo}
                 />
             </>
         );

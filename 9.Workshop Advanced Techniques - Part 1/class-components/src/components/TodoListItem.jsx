@@ -22,6 +22,12 @@ export default class TodoListItem extends Component {
                         onClick={() => this.props.toggleTodo(this.props.id)}>
                         {this.props.isCompleted ? 'Undo' : 'Done'}
                     </Button>
+                    <Button
+                        type='primary'
+                        danger
+                        onClick={() => this.props.deleteTodo(this.props.id)}>
+                        Remove
+                    </Button>
                 </Card>
             </>
         );
