@@ -27,11 +27,7 @@ function App() {
                         <Route path='/games' element={<GameList />}></Route>
                         <Route
                             path='/games/create'
-                            element={
-                                <AuthGuard>
-                                    <GameCreate />
-                                </AuthGuard>
-                            }
+                            element={<GameCreate />}
                         ></Route>
                         <Route
                             path='/games/:gameId/details'
@@ -45,6 +41,9 @@ function App() {
                         <Route path='/register' element={<Register />}></Route>
                         <Route path={Path.Logout} element={<Logout />}></Route>
                     </Routes>
+                    <Route element={<AuthGuard />}>
+                        <Route path='/games/create' element={<GameCreate />} />
+                    </Route>
                 </div>
             </AuthProvider>
         </ErrorBoundary>
