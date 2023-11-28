@@ -1,18 +1,27 @@
 import { Component } from 'react';
-import { Card} from 'antd';
+import { Button, Card } from 'antd';
 
 export default class TodoListItem extends Component {
+    componentDidUpdate() {
+        console.log(`${this.props.label} - Did Update`);
+    }
     render() {
         return (
             <>
                 <Card
                     title={this.props.label}
-                    extra={<a href='#'>More</a>}
                     style={{
                         width: 300,
+                        backgroundColor: this.props.isCompleted
+                            ? 'red'
+                            : 'green',
                     }}
                 >
-                    <p>{this.props.isCompeted ? 'Completed' : 'Pending'}</p>
+                    <Button
+                        type='primary'
+                        onClick={() => this.props.toggleTodo(this.props.id)}>
+                        {this.props.isCompleted ? 'Undo' : 'Done'}
+                    </Button>
                 </Card>
             </>
         );

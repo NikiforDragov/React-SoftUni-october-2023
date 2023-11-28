@@ -77,6 +77,8 @@ class App extends React.Component {
             todos: [],
             name: 'Pesho',
         };
+
+        this.toggleTodo = this.toggleTodo.bind(this);
     }
 
     componentDidMount() {
@@ -85,10 +87,21 @@ class App extends React.Component {
             .then((res) => res.json())
             .then((result) => {
                 this.setState({
-                    todos: Object.values(result)
-                })
+                    todos: Object.values(result),
+                });
             });
     }
+
+    toggleTodo(todoId) {
+        this.setState({
+            todos: this.state.todos.map((todo) =>
+                todo.id === todoId
+                    ? { ...todo, isCompleted: !todo.isCompleted }
+                    : todo
+            ),
+        });
+    }
+
     render() {
         return (
             <>
@@ -96,7 +109,10 @@ class App extends React.Component {
 
                 <h1>{this.state.name}</h1>
 
-                <TodoList todos={this.state.todos}/>
+                <TodoList
+                    todos={this.state.todos}
+                    toggleTodo={this.toggleTodo}
+                />
             </>
         );
     }
