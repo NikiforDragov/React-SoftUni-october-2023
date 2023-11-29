@@ -26,24 +26,24 @@ function App() {
                         <Route path={Path.Home} element={<Home />}></Route>
                         <Route path='/games' element={<GameList />}></Route>
                         <Route
-                            path='/games/create'
-                            element={<GameCreate />}
-                        ></Route>
-                        <Route
                             path='/games/:gameId/details'
                             element={<GameDetails />}
                         ></Route>
+
+                        <Route path='/login' element={<Login />}></Route>
+                        <Route path='/register' element={<Register />}></Route>
+                        <Route element={<AuthGuard />}>
+                            <Route
+                                path='/games/create'
+                                element={<GameCreate />}
+                            />
+                        </Route>
                         <Route
                             path={Path.GameEdit}
                             element={<GameEdit />}
                         ></Route>
-                        <Route path='/login' element={<Login />}></Route>
-                        <Route path='/register' element={<Register />}></Route>
                         <Route path={Path.Logout} element={<Logout />}></Route>
                     </Routes>
-                    <Route element={<AuthGuard />}>
-                        <Route path='/games/create' element={<GameCreate />} />
-                    </Route>
                 </div>
             </AuthProvider>
         </ErrorBoundary>
