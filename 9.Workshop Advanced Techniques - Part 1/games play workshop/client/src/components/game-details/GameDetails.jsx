@@ -53,18 +53,9 @@ export default function GameDetails() {
         }
     };
 
-    // TODO: temp solution
-    const initialValues = useMemo(
-        () => ({
-            comment: '',
-        }),
-        []
-    );
-
-    const { values, onChange, onSubmit } = useForm(
-        addCommentHandler,
-        initialValues
-    );
+    const { values, onChange, onSubmit } = useForm(addCommentHandler, {
+        comment: '',
+    });
 
     const isOwner = userId === game._ownerId;
 
